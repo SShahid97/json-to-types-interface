@@ -40,7 +40,7 @@ export default function TypesOutput({ nestedObjs }: TypesOutputProps) {
           {nestedObjs.map((item) => {
             const pars = JSON.parse(item.value);
             return (
-              <div>
+              <div key={new Date().getTime()}>
                 <span style={{ color: "#ab417b" }}>export {item.type} </span>
                 <span style={{ color: "blue" }}>{capitalize(item.key)} </span>
                 {item.type === "type" ? `= {` : ` {`}
@@ -58,25 +58,33 @@ export default function TypesOutput({ nestedObjs }: TypesOutputProps) {
                             {Array.isArray(value) &&
                               value.length > 0 &&
                               typeof value[0] === "object" && (
-                                <span key={key} style={{ paddingLeft: 20 }}>
+                                <span
+                                  style={{ paddingLeft: 20, color: "#626262" }}
+                                >
                                   {`${key}: (${capitalize(key)}Entity) [];`}
                                 </span>
                               )}
-                               {Array.isArray(value) &&
+                            {Array.isArray(value) &&
                               value.length > 0 &&
                               typeof value[0] !== "object" && (
-                                <span style={{ color: "#626262" }}>
+                                <span
+                                  style={{ paddingLeft: 20, color: "#626262" }}
+                                >
                                   {`${key}: ${typeof value[0]}[];`}
                                 </span>
                               )}
                             {Array.isArray(value) && value.length == 0 && (
-                              <span style={{ color: "#626262" }}>
+                              <span
+                                style={{ paddingLeft: 20, color: "#626262" }}
+                              >
                                 {`${key}: (null)[] | null;`}
                               </span>
                             )}
-                           
+
                             {!Array.isArray(value) && (
-                              <span style={{ color: "#626262" }}>
+                              <span
+                                style={{ paddingLeft: 20, color: "#626262" }}
+                              >
                                 {`${key}: ${capitalize(key)};`}
                               </span>
                             )}
@@ -86,10 +94,7 @@ export default function TypesOutput({ nestedObjs }: TypesOutputProps) {
                       </>
                     ) : (
                       <>
-                        <span
-                          key={key}
-                          style={{ paddingLeft: 20, color: "#626262" }}
-                        >
+                        <span style={{ paddingLeft: 20, color: "#626262" }}>
                           {`${key}: ${typeof value};`}
                         </span>
                         <br />
