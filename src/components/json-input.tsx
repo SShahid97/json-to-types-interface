@@ -30,7 +30,11 @@ export default function JsonInput({
         ]);
         Object.entries(parsedJson).map(([key, value]) => {
           if (typeof value === "object" && value !== null) {
-            if (Array.isArray(value) && value.length > 0) {
+            if (
+              Array.isArray(value) &&
+              value.length > 0 &&
+              typeof value[0] === "object"
+            ) {
               setNestedObjs((prev) => [
                 ...prev,
                 {
@@ -74,7 +78,6 @@ export default function JsonInput({
     setError(false);
     const { value } = e.target;
     if (!isValidJson(value)) {
-      console.log("ddd");
       setError(true);
     } else {
       setError(false);
@@ -110,29 +113,29 @@ export default function JsonInput({
             fontSize: 17,
             borderRadius: "5px",
             padding: 7,
-            height: '55vh',
+            height: "53vh",
           }}
         />
         <div style={{ display: "flex", flexDirection: "row", gap: 10 }}>
           <input
-            title={error || !jsonInputData?"Please enter a valid JSON":""}
+            title={error || !jsonInputData ? "Please enter a valid JSON" : ""}
             type="button"
-            className={error || !jsonInputData?"btn-disabled":"btn"}
+            className={error || !jsonInputData ? "btn-disabled" : "btn"}
             disabled={error || !jsonInputData}
             value="Generate Interface"
             onClick={() => handleGenerateOutput("interface")}
           />
           <input
-            title={error || !jsonInputData?"Please enter a valid JSON":""}
+            title={error || !jsonInputData ? "Please enter a valid JSON" : ""}
             type="button"
-            className={error || !jsonInputData?"btn-disabled":"btn"}
+            className={error || !jsonInputData ? "btn-disabled" : "btn"}
             disabled={error || !jsonInputData}
             value="Generate Type"
             onClick={() => handleGenerateOutput("type")}
           />
         </div>
       </div>
-      <div style={{ marginTop: 50 }}></div>
+      {/* <div style={{ marginTop: 50 }}></div> */}
     </div>
   );
 }

@@ -33,8 +33,8 @@ export default function TypesOutput({ nestedObjs }: TypesOutputProps) {
             whiteSpace: "break-spaces",
             borderRadius: "5px",
             overflowY: "auto",
-            height: '60vh',
-            fontFamily:'monospace'
+            height: "60vh",
+            fontFamily: "monospace",
           }}
         >
           {nestedObjs.map((item) => {
@@ -54,21 +54,42 @@ export default function TypesOutput({ nestedObjs }: TypesOutputProps) {
                             {`${key}: null;`}
                           </span>
                         ) : (
-                          <span key={key} style={{ paddingLeft: 20 }}>
-                            {Array.isArray(value) && value.length > 0 ? (
-                              <span style={{ color:'#626262'}}>{`${key}: (${capitalize(key)}Entity) [];`}</span>
-                            ) : Array.isArray(value) && value.length == 0 ? (
-                              <span style={{ color:'#626262'}}>{`${key}: (null)[] | null;`}</span>
-                            ) : (
-                              <span style={{ color:'#626262'}}>{`${key}: ${capitalize(key)};`}</span>
+                          <>
+                            {Array.isArray(value) &&
+                              value.length > 0 &&
+                              typeof value[0] === "object" && (
+                                <span key={key} style={{ paddingLeft: 20 }}>
+                                  {`${key}: (${capitalize(key)}Entity) [];`}
+                                </span>
+                              )}
+                               {Array.isArray(value) &&
+                              value.length > 0 &&
+                              typeof value[0] !== "object" && (
+                                <span style={{ color: "#626262" }}>
+                                  {`${key}: ${typeof value[0]}[];`}
+                                </span>
+                              )}
+                            {Array.isArray(value) && value.length == 0 && (
+                              <span style={{ color: "#626262" }}>
+                                {`${key}: (null)[] | null;`}
+                              </span>
                             )}
-                          </span>
+                           
+                            {!Array.isArray(value) && (
+                              <span style={{ color: "#626262" }}>
+                                {`${key}: ${capitalize(key)};`}
+                              </span>
+                            )}
+                          </>
                         )}
                         <br />
                       </>
                     ) : (
                       <>
-                        <span key={key} style={{ paddingLeft: 20, color:'#626262' }}>
+                        <span
+                          key={key}
+                          style={{ paddingLeft: 20, color: "#626262" }}
+                        >
                           {`${key}: ${typeof value};`}
                         </span>
                         <br />
@@ -84,7 +105,7 @@ export default function TypesOutput({ nestedObjs }: TypesOutputProps) {
         <div>
           <input
             disabled={nestedObjs.length === 0}
-            className={nestedObjs.length === 0 ? "btn-disabled":"btn"}
+            className={nestedObjs.length === 0 ? "btn-disabled" : "btn"}
             type="button"
             value="Copy"
             onClick={handleCopy}
