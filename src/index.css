@@ -44,17 +44,36 @@
 }
 
 .app-outer {
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 5px;
+}
+
+.app-inner {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   column-gap: 50px;
 }
 
+.app-title {
+  font-size: x-large;
+  font-weight: 600;
+}
+
 @media (max-width: 768px){
-  .app-outer {
+  .app-inner {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 50px;
+  }
+  .app-outer {
+    padding-left: 20px;
+    padding-right: 40px;
+  }
+  .app-title {
+    font-size: medium;
+    font-weight: 600;
   }
 }

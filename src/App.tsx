@@ -8,12 +8,12 @@ function App() {
   const [jsonInputData, setJsonInputData] = useState<string>("");
   const [nestedObjs, setNestedObjs] = useState<OutputObj[]>([]);
   return (
-    <div style={{ padding: 100, paddingTop:5 }}>
-      <h2>
+    <div className="app-outer">
+      <p className="app-title">
         JSON to TypeScript <span style={{ color: "#ab417b" }}>Interface </span>{" "}
         and <span style={{ color: "#ab417b" }}>Type </span>
-      </h2>
-      <div className="app-outer">
+      </p>
+      <div className="app-inner">
         <JsonInput
           jsonInputData={jsonInputData}
           setJsonInputData={setJsonInputData}
