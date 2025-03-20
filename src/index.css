@@ -61,6 +61,10 @@
   font-weight: 600;
 }
 
+textarea {
+  resize: none;
+}
+
 @media (max-width: 768px){
   .app-inner {
     display: flex;
