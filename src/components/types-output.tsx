@@ -11,7 +11,6 @@ export default function TypesOutput({ nestedObjs }: TypesOutputProps) {
 
   const handleCopy = () => {
     const output = document.getElementById("output-box")?.innerText;
-    console.log(output);
     if (output) copy(output);
   };
 
@@ -40,13 +39,13 @@ export default function TypesOutput({ nestedObjs }: TypesOutputProps) {
           {nestedObjs.map((item) => {
             const pars = JSON.parse(item.value);
             return (
-              <div key={new Date().getTime()}>
+              <div key={new Date().getTime()+Math.floor(Math.random()*1000)}>
                 <span style={{ color: "#ab417b" }}>export {item.type} </span>
                 <span style={{ color: "blue" }}>{capitalize(item.key)} </span>
                 {item.type === "type" ? `= {` : ` {`}
                 <br />
                 {Object.entries(pars).map(([key, value]) => (
-                  <>
+                  <div  key={new Date().getTime()+Math.floor(Math.random()*4000)}>
                     {typeof value === "object" ? (
                       <>
                         {value === null ? (
@@ -100,7 +99,7 @@ export default function TypesOutput({ nestedObjs }: TypesOutputProps) {
                         <br />
                       </>
                     )}
-                  </>
+                  </div>
                 ))}
                 <span>{"}"}</span>
               </div>

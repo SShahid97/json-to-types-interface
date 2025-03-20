@@ -21,6 +21,7 @@ export default function JsonInput({
   const handleGenerateOutput = (type: string) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setNestedObjs((_prev) => []);
+    setNestedObjs([]);
     try {
       const parsedJson = JSON.parse(jsonInputData);
       if (typeof parsedJson === "object") {
